@@ -1,6 +1,7 @@
 package com.qa.pages2;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -30,38 +31,56 @@ public void setUp() throws Exception {
 
 }
 
-@Test(priority=1)
+@Test(description="To Verify the Tools icon is displayed",priority=1)
 public void verify() throws Exception
 {
-	Thread.sleep(5000);
+	Thread.sleep(2000);
 	boolean element=driver.findElement(By.xpath("//li[@id='headtools']//span[contains(text(),'Tools')]")).isDisplayed();
 	Assert.assertTrue(element, "Tools");	
 	
 }
 
-@Test(priority=2)	
+
+@Test(description="To Verify the Popular Tools icon is clicking", priority=2)	
 	
 	public void clickTool() throws Exception
 	{
-		Thread.sleep(2000);
-						
-				String actualTitle = driver.getTitle();
-				System.out.println(actualTitle);
-				Thread.sleep(2000);
-				//WebElement element1=driver.findElement(By.xpath("//a[contains(text(),'Popular Tools')]"));
-				//element1.click();
+	           		
+				WebElement element=driver.findElement(By.xpath("//li[@id='headtools']//span[contains(text(),'Tools')]"));
+				element.click();	
+				Thread.sleep(2000);	
+				WebElement element1=driver.findElement(By.linkText("Popular Tools"));
+				element1.click();
 				
 }
 
-/*@Test(priority=3)	
+@Test(description="To Verify the functionality of search field",priority=3)	
 
 public void verifySearch() throws Exception
 {
-	Thread.sleep(2000);
 	
 			WebElement search1=driver.findElement(By.xpath("//input[@id='mainsearch']"));
 			search1.sendKeys("alert");
-			
-}*/
+			WebElement value=driver.findElement(By.xpath("//img[@src='https://genpactonline.sharepoint.com/_catalogs/masterpage/GSocial/images/searchtop.png?ctag=190326']"));
+			value.sendKeys(Keys.ENTER);
+}
+
+@Test(description="To Verify the Popular Tools Dashboard",priority=4)
+public void verifyPopularToolsDashboard()
+
+{
+	Boolean element=driver.findElement(By.xpath("//div[@class='poplinks'][contains(text(),'Alert')]")).isDisplayed();
+	Assert.assertTrue(element, "Alert");	
+}
+
+
+@Test(description="To Verify the All Tools is displaying ",priority=5)
+public void VerifyAllTools()
+{
+
+	Boolean element =driver.findElement(By.xpath("//a[@href='#Toolszone']")).isDisplayed();
+	Assert.assertTrue(element, "All Tools");	
+}
 
 }
+	
